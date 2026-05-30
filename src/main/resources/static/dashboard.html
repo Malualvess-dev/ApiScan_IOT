@@ -3,108 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AgroScan IoT Dashboard</title>
 
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family: Arial, Helvetica, sans-serif;
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: Arial, Helvetica, sans-serif;
         }
 
-        body{
-            background: linear-gradient(135deg,#d8f3dc,#f8fff9);
-            min-height:100vh;
+        body {
+          background: linear-gradient(135deg, #d8f3dc, #f8fff9);
+          min-height: 100vh;
         }
 
-        header{
-            background: linear-gradient(90deg,#1b5e20,#43a047);
-            color:white;
-            text-align:center;
-            padding:25px;
-            box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        header {
+          background: linear-gradient(90deg, #1b5e20, #43a047);
+          color: white;
+          text-align: center;
+          padding: 28px;
+          box-shadow: 0 4px 14px rgba(0,0,0,0.2);
         }
 
-        header h1{
-            font-size:32px;
+        header h1 {
+          font-size: 34px;
         }
 
-        header p{
-            margin-top:10px;
+        header p {
+          margin-top: 8px;
+          font-size: 16px;
         }
 
-        .container{
-            width:90%;
-            max-width:1200px;
-            margin:40px auto;
+        .container {
+          width: 90%;
+          max-width: 1250px;
+          margin: 40px auto;
         }
 
-        .cards{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:20px;
+        .cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+          gap: 22px;
         }
 
-        .card{
-            background:white;
-            padding:25px;
-            border-radius:20px;
-            text-align:center;
-            box-shadow:0 10px 20px rgba(0,0,0,0.12);
-            transition:0.3s;
+        .card {
+          background: white;
+          padding: 26px;
+          border-radius: 22px;
+          text-align: center;
+          box-shadow: 0 10px 22px rgba(0,0,0,0.12);
         }
 
-        .card:hover{
-            transform:translateY(-5px);
+        .icon {
+          font-size: 42px;
+          margin-bottom: 10px;
         }
 
-        .icon{
-            font-size:40px;
-            margin-bottom:10px;
+        .card h2 {
+          color: #444;
+          margin-bottom: 14px;
         }
 
-        .card h2{
-            color:#555;
-            margin-bottom:15px;
+        .value {
+          font-size: 30px;
+          font-weight: bold;
+          color: #2e7d32;
         }
 
-        .value{
-            font-size:30px;
-            font-weight:bold;
-            color:#2e7d32;
+        .status {
+          font-size: 24px;
+          font-weight: bold;
+          color: #d32f2f;
         }
 
-        .status{
-            font-size:24px;
-            font-weight:bold;
-            color:#d32f2f;
+        .info, .historico {
+          margin-top: 30px;
+          background: white;
+          padding: 25px;
+          border-radius: 22px;
+          box-shadow: 0 10px 22px rgba(0,0,0,0.12);
         }
 
-        .info{
-            margin-top:30px;
-            background:white;
-            padding:25px;
-            border-radius:20px;
-            box-shadow:0 10px 20px rgba(0,0,0,0.12);
+        .info h3, .historico h3 {
+          color: #1b5e20;
+          margin-bottom: 12px;
         }
 
-        .info h3{
-            color:#1b5e20;
-            margin-bottom:10px;
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 15px;
+          overflow: hidden;
+          border-radius: 12px;
         }
 
-        footer{
-            text-align:center;
-            margin-top:30px;
-            padding-bottom:20px;
-            color:#666;
+        thead {
+          background: #2e7d32;
+          color: white;
         }
 
+        th, td {
+          padding: 14px;
+          text-align: center;
+          border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+          background: #f1f8f2;
+        }
+
+        tbody tr:hover {
+          background: #dff3e3;
+        }
+
+        .alerta {
+          color: #d32f2f;
+          font-weight: bold;
+        }
+
+        .ok {
+          color: #2e7d32;
+          font-weight: bold;
+        }
+
+        footer {
+          text-align: center;
+          margin: 35px 0;
+          color: #666;
+        }
     </style>
-
 </head>
 
 <body>
@@ -116,8 +144,7 @@
 
 <div class="container">
 
-    <div class="cards">
-
+    <section class="cards">
         <div class="card">
             <div class="icon">🔎</div>
             <h2>Categoria</h2>
@@ -147,19 +174,39 @@
             <h2>Status</h2>
             <div class="status" id="status">--</div>
         </div>
+    </section>
 
-    </div>
-
-    <div class="info">
+    <section class="info">
         <h3>Resumo do Sistema</h3>
-
         <p>
-            O AgroScan IoT utiliza ESP32, sensores ambientais e uma API REST para
-            monitorar diferentes categorias agrícolas. O sistema realiza o
-            escaneamento da amostra, classifica entre Planta, Verdura, Fruta,
-            Legume ou Solo e apresenta o status em tempo real.
+            O AgroScan IoT utiliza ESP32, sensores ambientais e uma API REST para monitorar
+            diferentes categorias agrícolas. O sistema realiza o escaneamento da amostra,
+            classifica entre Planta, Verdura, Fruta, Legume ou Solo e apresenta o status em tempo real.
         </p>
-    </div>
+    </section>
+
+    <section class="historico">
+        <h3>Histórico de Leituras</h3>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Categoria</th>
+                <th>Temperatura</th>
+                <th>Umidade do Ar</th>
+                <th>Umidade do Solo</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody id="tabelaHistorico">
+            <tr>
+                <td colspan="6">Carregando histórico...</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 
 </div>
 
@@ -168,45 +215,81 @@
 </footer>
 
 <script>
+    async function carregarStatus() {
+      try {
+        const response = await fetch('/scanner/status');
+        const dados = await response.json();
 
-    async function carregarDados(){
-
-        try{
-
-            const response = await fetch('/scanner/status');
-
-            const dados = await response.json();
-
-            if(dados){
-
-                document.getElementById("categoria").innerText =
-                    dados.categoria || "--";
-
-                document.getElementById("temperatura").innerText =
-                    dados.temperatura + " °C";
-
-                document.getElementById("umidadeAr").innerText =
-                    dados.umidadeAr + " %";
-
-                document.getElementById("umidadeSolo").innerText =
-                    dados.umidadeSolo + " %";
-
-                document.getElementById("status").innerText =
-                    dados.status;
-            }
-
-        }catch(error){
-
-            console.log(error);
-
+        if (dados) {
+          document.getElementById("categoria").innerText = dados.categoria || "--";
+          document.getElementById("temperatura").innerText = dados.temperatura + " °C";
+          document.getElementById("umidadeAr").innerText = dados.umidadeAr + " %";
+          document.getElementById("umidadeSolo").innerText = dados.umidadeSolo + " %";
+          document.getElementById("status").innerText = dados.status || "--";
         }
-
+      } catch (error) {
+        console.log("Erro ao carregar status:", error);
+      }
     }
 
-    carregarDados();
+    async function carregarHistorico() {
+      try {
+        const response = await fetch('/scanner/historico');
+        const historico = await response.json();
+        const tabela = document.getElementById("tabelaHistorico");
 
-    setInterval(carregarDados,3000);
+        tabela.innerHTML = "";
 
+        if (!historico || historico.length === 0) {
+          tabela.innerHTML = `
+            <tr>
+              <td colspan="6">Nenhuma leitura registrada ainda.</td>
+            </tr>
+          `;
+          return;
+        }
+
+        historico.slice().reverse().forEach(item => {
+          const classeStatus = verificarAlerta(item.status) ? "alerta" : "ok";
+
+          tabela.innerHTML += `
+            <tr>
+              <td>${item.id}</td>
+              <td>${item.categoria || "--"}</td>
+              <td>${item.temperatura} °C</td>
+              <td>${item.umidadeAr} %</td>
+              <td>${item.umidadeSolo} %</td>
+              <td class="${classeStatus}">${item.status}</td>
+            </tr>
+          `;
+        });
+
+      } catch (error) {
+        console.log("Erro ao carregar histórico:", error);
+      }
+    }
+
+    function verificarAlerta(status) {
+      if (!status) return false;
+
+      const alertas = [
+        "Solo seco",
+        "Solo muito úmido",
+        "Precisa de água",
+        "Muito quente",
+        "Risco de deterioração"
+      ];
+
+      return alertas.includes(status);
+    }
+
+    function atualizarDashboard() {
+      carregarStatus();
+      carregarHistorico();
+    }
+
+    atualizarDashboard();
+    setInterval(atualizarDashboard, 3000);
 </script>
 
 </body>

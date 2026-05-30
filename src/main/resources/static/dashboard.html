@@ -2,177 +2,211 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard AgroScan IoT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgroScan IoT Dashboard</title>
+
     <style>
-        * {
-          box-sizing: border-box;
-          font-family: Arial, sans-serif;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        body {
-          margin: 0;
-          min-height: 100vh;
-          background: linear-gradient(135deg, #dff3e3, #f7fff8);
-          color: #1b1b1b;
+        body{
+            background: linear-gradient(135deg,#d8f3dc,#f8fff9);
+            min-height:100vh;
         }
 
-        header {
-          background: linear-gradient(90deg, #1b5e20, #43a047);
-          color: white;
-          padding: 28px;
-          text-align: center;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        header{
+            background: linear-gradient(90deg,#1b5e20,#43a047);
+            color:white;
+            text-align:center;
+            padding:25px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.2);
         }
 
-        header h1 {
-          margin: 0;
-          font-size: 34px;
+        header h1{
+            font-size:32px;
         }
 
-        header p {
-          margin: 8px 0 0;
-          font-size: 16px;
+        header p{
+            margin-top:10px;
         }
 
-        .container {
-          max-width: 1100px;
-          margin: 40px auto;
-          padding: 0 20px;
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:40px auto;
         }
 
-        .cards {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 24px;
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:20px;
         }
 
-        .card {
-          background: white;
-          border-radius: 22px;
-          padding: 28px;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-          text-align: center;
-          transition: 0.3s;
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0 10px 20px rgba(0,0,0,0.12);
+            transition:0.3s;
         }
 
-        .card:hover {
-          transform: translateY(-6px);
+        .card:hover{
+            transform:translateY(-5px);
         }
 
-        .icone {
-          font-size: 38px;
-          margin-bottom: 10px;
+        .icon{
+            font-size:40px;
+            margin-bottom:10px;
         }
 
-        .card h2 {
-          font-size: 18px;
-          color: #444;
-          margin-bottom: 14px;
+        .card h2{
+            color:#555;
+            margin-bottom:15px;
         }
 
-        .valor {
-          font-size: 34px;
-          font-weight: bold;
-          color: #2e7d32;
+        .value{
+            font-size:30px;
+            font-weight:bold;
+            color:#2e7d32;
         }
 
-        .status {
-          font-size: 28px;
-          font-weight: bold;
-          color: #d32f2f;
+        .status{
+            font-size:24px;
+            font-weight:bold;
+            color:#d32f2f;
         }
 
-        .info {
-          margin-top: 35px;
-          background: white;
-          border-left: 8px solid #2e7d32;
-          padding: 22px;
-          border-radius: 16px;
-          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        .info{
+            margin-top:30px;
+            background:white;
+            padding:25px;
+            border-radius:20px;
+            box-shadow:0 10px 20px rgba(0,0,0,0.12);
         }
 
-        .info h3 {
-          margin-top: 0;
-          color: #1b5e20;
+        .info h3{
+            color:#1b5e20;
+            margin-bottom:10px;
         }
 
-        footer {
-          text-align: center;
-          margin-top: 50px;
-          color: #555;
-          font-size: 14px;
+        footer{
+            text-align:center;
+            margin-top:30px;
+            padding-bottom:20px;
+            color:#666;
         }
+
     </style>
+
 </head>
 
 <body>
 
 <header>
-    <h1>🌱 Dashboard AgroScan IoT</h1>
-    <p>Monitoramento inteligente de solo e ambiente com ESP32</p>
+    <h1>🌱 AgroScan IoT</h1>
+    <p>Monitoramento Inteligente de Plantas, Verduras, Frutas, Legumes e Solo</p>
 </header>
 
-<main class="container">
+<div class="container">
 
-    <section class="cards">
+    <div class="cards">
+
         <div class="card">
-            <div class="icone">🌡️</div>
+            <div class="icon">🔎</div>
+            <h2>Categoria</h2>
+            <div class="value" id="categoria">--</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌡️</div>
             <h2>Temperatura</h2>
-            <div class="valor" id="temperatura">--</div>
+            <div class="value" id="temperatura">--</div>
         </div>
 
         <div class="card">
-            <div class="icone">💧</div>
+            <div class="icon">💧</div>
             <h2>Umidade do Ar</h2>
-            <div class="valor" id="umidadeAr">--</div>
+            <div class="value" id="umidadeAr">--</div>
         </div>
 
         <div class="card">
-            <div class="icone">🌾</div>
+            <div class="icon">🌾</div>
             <h2>Umidade do Solo</h2>
-            <div class="valor" id="umidadeSolo">--</div>
+            <div class="value" id="umidadeSolo">--</div>
         </div>
 
         <div class="card">
-            <div class="icone">⚠️</div>
-            <h2>Status Atual</h2>
+            <div class="icon">⚠️</div>
+            <h2>Status</h2>
             <div class="status" id="status">--</div>
         </div>
-    </section>
 
-    <section class="info">
+    </div>
+
+    <div class="info">
         <h3>Resumo do Sistema</h3>
+
         <p>
-            O AgroScan IoT utiliza sensores conectados ao ESP32 para coletar dados ambientais,
-            enviar informações para uma API REST e exibir a classificação atual do solo em tempo real.
+            O AgroScan IoT utiliza ESP32, sensores ambientais e uma API REST para
+            monitorar diferentes categorias agrícolas. O sistema realiza o
+            escaneamento da amostra, classifica entre Planta, Verdura, Fruta,
+            Legume ou Solo e apresenta o status em tempo real.
         </p>
-    </section>
+    </div>
 
-    <footer>
-        Atualização automática a cada 3 segundos
-    </footer>
+</div>
 
-</main>
+<footer>
+    Atualização automática a cada 3 segundos
+</footer>
 
 <script>
-    async function carregarStatus() {
-      try {
-        const resposta = await fetch('/scanner/status');
-        const dados = await resposta.json();
 
-        if (dados) {
-          document.getElementById('temperatura').innerText = dados.temperatura + ' °C';
-          document.getElementById('umidadeAr').innerText = dados.umidadeAr + ' %';
-          document.getElementById('umidadeSolo').innerText = dados.umidadeSolo + ' %';
-          document.getElementById('status').innerText = dados.status;
+    async function carregarDados(){
+
+        try{
+
+            const response = await fetch('/scanner/status');
+
+            const dados = await response.json();
+
+            if(dados){
+
+                document.getElementById("categoria").innerText =
+                    dados.categoria || "--";
+
+                document.getElementById("temperatura").innerText =
+                    dados.temperatura + " °C";
+
+                document.getElementById("umidadeAr").innerText =
+                    dados.umidadeAr + " %";
+
+                document.getElementById("umidadeSolo").innerText =
+                    dados.umidadeSolo + " %";
+
+                document.getElementById("status").innerText =
+                    dados.status;
+            }
+
+        }catch(error){
+
+            console.log(error);
+
         }
-      } catch (erro) {
-        console.log('Erro ao carregar dados:', erro);
-      }
+
     }
 
-    carregarStatus();
-    setInterval(carregarStatus, 3000);
+    carregarDados();
+
+    setInterval(carregarDados,3000);
+
 </script>
 
 </body>

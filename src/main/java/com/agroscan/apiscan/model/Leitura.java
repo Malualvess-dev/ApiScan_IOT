@@ -1,5 +1,6 @@
 package com.agroscan.apiscan.model;
 
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,51 +11,27 @@ public class Leitura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String categoria;
     private Double temperatura;
     private Double umidadeAr;
     private Integer umidadeSolo;
     private String status;
 
-    public Leitura() {
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Double getTemperatura() { return temperatura; }
+    public void setTemperatura(Double temperatura) { this.temperatura = temperatura; }
 
-    public Double getTemperatura() {
-        return temperatura;
-    }
+    public Double getUmidadeAr() { return umidadeAr; }
+    public void setUmidadeAr(Double umidadeAr) { this.umidadeAr = umidadeAr; }
 
-    public void setTemperatura(Double temperatura) {
-        this.temperatura = temperatura;
-    }
+    public Integer getUmidadeSolo() { return umidadeSolo; }
+    public void setUmidadeSolo(Integer umidadeSolo) { this.umidadeSolo = umidadeSolo; }
 
-    public Double getUmidadeAr() {
-        return umidadeAr;
-    }
-
-    public void setUmidadeAr(Double umidadeAr) {
-        this.umidadeAr = umidadeAr;
-    }
-
-    public Integer getUmidadeSolo() {
-        return umidadeSolo;
-    }
-
-    public void setUmidadeSolo(Integer umidadeSolo) {
-        this.umidadeSolo = umidadeSolo;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

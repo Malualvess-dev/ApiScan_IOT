@@ -1,6 +1,5 @@
 package com.agroscan.apiscan.service;
 
-
 import com.agroscan.apiscan.dto.LeituraDTO;
 import com.agroscan.apiscan.model.Leitura;
 import com.agroscan.apiscan.repository.LeituraRepository;
@@ -18,20 +17,13 @@ public class LeituraService {
     }
 
     public Leitura salvar(LeituraDTO dto) {
+        Leitura leitura = new Leitura();
 
-        com.agroscan.apiscan.model.Leitura leitura = new com.agroscan.apiscan.model.Leitura();
-
+        leitura.setCategoria(dto.getCategoria());
         leitura.setTemperatura(dto.getTemperatura());
         leitura.setUmidadeAr(dto.getUmidadeAr());
         leitura.setUmidadeSolo(dto.getUmidadeSolo());
-
-        if(dto.getUmidadeSolo() < 30){
-            leitura.setStatus("Solo seco");
-        } else if(dto.getUmidadeSolo() <= 70){
-            leitura.setStatus("Solo ideal");
-        } else {
-            leitura.setStatus("Solo muito úmido");
-        }
+        leitura.setStatus(classificarStatus(dto));
 
         return repository.save(leitura);
     }
@@ -45,5 +37,45 @@ public class LeituraService {
                 .stream()
                 .reduce((primeira, ultima) -> ultima)
                 .orElse(null);
+    }
+
+    private String classificarStatus(LeituraDTO dto) {
+        String categoria = dto.getCategoria();
+        Integer umidadeSolo = dto.getUmidadeSolo();
+        Double temperatura = dto.getTemperatura();
+
+        if (categoria == null) {
+            categoria = "Solo";
+        }
+
+        if (categoria.equalsIgnoreCase("Solo")) {
+            if (umidadeSolo < 30) {
+                return "Solo seco";
+            } else if (umidadeSolo <= 70) {
+                return "Solo ideal";
+            } else {
+                return "Solo muito úmido";
+            }
+        }
+
+        if (categoria.equalsIgnoreCase("Planta") || categoria.equalsIgnoreCase("Verdura")) {
+            if (umidadeSolo < 30) {
+                return "Precisa de água";
+            } else if (temperatura > 35) {
+                return "Muito quente";
+            } else {
+                return "Saudável";
+            }
+        }
+
+        if (categoria.equalsIgnoreCase("Fruta") || categoria.equalsIgnoreCase("Legume")) {
+            if (temperatura > 35) {
+                return "Risco de deterioração";
+            } else {
+                return "Boa condição";
+            }
+        }
+
+        return "Analisado";
     }
 }

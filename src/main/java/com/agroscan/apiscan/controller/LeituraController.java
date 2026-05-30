@@ -1,8 +1,5 @@
 package com.agroscan.apiscan.controller;
 
-
-
-
 import com.agroscan.apiscan.dto.LeituraDTO;
 import com.agroscan.apiscan.model.Leitura;
 import com.agroscan.apiscan.service.LeituraService;
@@ -21,12 +18,12 @@ public class LeituraController {
     }
 
     @PostMapping("/dados")
-    public Leitura salvar(@RequestBody LeituraDTO dto){
+    public Leitura salvar(@RequestBody LeituraDTO dto) {
         return service.salvar(dto);
     }
 
     @GetMapping("/historico")
-    public List<Leitura> listar(){
+    public List<Leitura> listar() {
         return service.listar();
     }
 
@@ -35,3 +32,4 @@ public class LeituraController {
         return service.buscarUltimaLeitura();
     }
 }
+

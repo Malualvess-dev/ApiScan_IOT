@@ -29,4 +29,9 @@ public class LeituraController {
     public List<Leitura> listar(){
         return service.listar();
     }
+
+    @GetMapping("/status")
+    public Leitura statusAtual() {
+        return service.buscarUltimaLeitura();
+    }
 }

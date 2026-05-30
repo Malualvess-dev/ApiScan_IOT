@@ -39,4 +39,11 @@ public class LeituraService {
     public List<Leitura> listar() {
         return repository.findAll();
     }
+
+    public Leitura buscarUltimaLeitura() {
+        return repository.findAll()
+                .stream()
+                .reduce((primeira, ultima) -> ultima)
+                .orElse(null);
+    }
 }

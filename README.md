@@ -130,6 +130,23 @@ gradlew bootRun
 ```
 
 ---
+## 🏆 Participantes
+
+RM: 561802
+Nome: Maria Luiza Alves de Aquino
+
+RM:560907
+Nome: João Victor Gomes
+
+RM:564508
+Nome:Lucas Barranha Giannini
+
+RM:561551
+Nome: Gabriel Fachin de Oliveira
+
+RM:565708
+Nome: Iago Dias Ainette
+
 
 ## 🌐 Integração com IoT
 
